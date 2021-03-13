@@ -3,7 +3,7 @@ import SearchBar from "./SearchBar";
 import DetailsBox from "./DetailsBox";
 import Tables from "./Tables";
 
-const DataTabPage = (props) => {
+const DataTabPage = ({ surfaceData, serverData }) => {
   const [searchText, setSearchText] = useState("");
   const handleSearch = (e) => {
     setSearchText(e.target.value);
@@ -18,7 +18,7 @@ const DataTabPage = (props) => {
       </div>
       <div className="row">
         <div className="col-9">
-          <Tables />
+          <Tables surfaceData={surfaceData} serverData={serverData} />
         </div>
         <div className="col-3">
           <DetailsBox />

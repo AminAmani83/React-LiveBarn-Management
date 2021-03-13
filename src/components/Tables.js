@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SurfacesTab from "./SurfacesTab";
 import ServersTab from "./ServersTab";
 
-const Tables = (props) => {
+const Tables = ({ surfaceData, serverData }) => {
   const tabs = { SURFACES: "SURFACES", SERVERS: "SERVERS" }; // Available Tabs (defined to avoid typos)
   const [activeTab, setActiveTab] = useState(tabs.SURFACES);
 
@@ -31,9 +31,9 @@ const Tables = (props) => {
       <div className="tab-content">
         <div className="tab-pane fade active show">
           {activeTab === tabs.SURFACES ? (
-            <SurfacesTab />
+            <SurfacesTab surfaceData={surfaceData} />
           ) : activeTab === tabs.SERVERS ? (
-            <ServersTab />
+            <ServersTab serverData={serverData} />
           ) : (
             ""
           )}

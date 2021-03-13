@@ -1,6 +1,6 @@
 import React from "react";
 
-const SurfacesTab = (props) => {
+const SurfacesTab = ({ surfaceData }) => {
   return (
     <div className="mt-4">
       <table className="table table-hover">
@@ -13,12 +13,12 @@ const SurfacesTab = (props) => {
           </tr>
         </thead>
         <tbody>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((row) => (
-            <tr className="table-dark" key={row}>
-              <td>Name {row}</td>
-              <td>Column content</td>
-              <td>Column content</td>
-              <td>Column content</td>
+          {surfaceData.map((row) => (
+            <tr className="table-dark" key={row.id} id={row.id}>
+              <td>{row.venueName}</td>
+              <td>{row.surfaceName}</td>
+              <td>{row.sport}</td>
+              <td>{row.status}</td>
             </tr>
           ))}
         </tbody>

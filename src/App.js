@@ -9,7 +9,8 @@ function App() {
     "https://2hsjstzo71.execute-api.us-east-1.amazonaws.com/prod/livebarn-interview-project";
 
   const [activeTab, setActiveTab] = useState(tabs.DATA);
-  const [data, setData] = useState([]);
+  const [surfaceData, setSurfaceData] = useState([]);
+  const [serverData, setServerData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [apiError, setApiError] = useState(null);
 
@@ -18,9 +19,14 @@ function App() {
       try {
         const response = await fetch(apiURL);
         if (response.ok) {
-          const result = await response.json();
-          setData(result);
-          console.log(data);
+          const surfaces = await response.json();
+          setSurfaceData(surfaces);
+          const servers = surfaces.map((result) => result.server);
+          const uniqueServers = servers.filter(
+            (value, index, self) =>
+              self.map((server) => server.id).indexOf(value.id) === index
+          );
+          setServerData(uniqueServers);
           setIsLoading(false);
         } else {
           // in case of 403, 404 or...
@@ -60,7 +66,10 @@ function App() {
             </div>
             <div className="col-11">
               {activeTab === tabs.DATA ? (
-                <DataTabPage />
+                <DataTabPage
+                  surfaceData={surfaceData}
+                  serverData={serverData}
+                />
               ) : activeTab === tabs.EMPTY ? (
                 <EmptyTabPage />
               ) : (
