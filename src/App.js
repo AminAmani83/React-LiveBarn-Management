@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import NavBar from "./components/NavBar";
-import DataTabPage from "./components/DataTabPage";
-import EmptyTabPage from "./components/EmptyTabPage";
+import NavBar from "./components/common/NavBar";
+import DataTabPage from "./components/DataTab/DataTabPage";
+import EmptyTabPage from "./components/EmptyTab/EmptyTabPage";
 
 function App() {
   const tabs = { EMPTY: "EMPTY", DATA: "DATA" }; // Available Tabs (defined to avoid typos)
