@@ -1,6 +1,6 @@
 import React from "react";
 
-const SurfacesTab = ({ surfaceData }) => {
+const SurfacesTab = ({ surfaceData, selectedSurfaceId, handleSelect }) => {
   return (
     <div className="mt-4">
       <table className="table table-hover">
@@ -14,7 +14,14 @@ const SurfacesTab = ({ surfaceData }) => {
         </thead>
         <tbody>
           {surfaceData.map((row) => (
-            <tr className="table-dark" key={row.id} id={row.id}>
+            <tr
+              className={`table-dark ${
+                selectedSurfaceId === row.id ? " table-active" : ""
+              }`}
+              key={row.id}
+              id={row.id}
+              onClick={handleSelect}
+            >
               <td>{row.venueName}</td>
               <td>{row.surfaceName}</td>
               <td>{row.sport}</td>

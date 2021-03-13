@@ -6,6 +6,19 @@ import Tables from "./Tables";
 const DataTabPage = () => {
   const apiURL =
     "https://2hsjstzo71.execute-api.us-east-1.amazonaws.com/prod/livebarn-interview-project";
+  const emptySurface = {
+    // sample API response item used for the selected surface initially
+    id: "",
+    surfaceName: "",
+    status: "",
+    venueName: "",
+    sport: "",
+    server: {
+      id: "",
+      ip4: "",
+      dns: "",
+    },
+  };
 
   const [surfaceData, setSurfaceData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -13,6 +26,7 @@ const DataTabPage = () => {
   const [searchText, setSearchText] = useState("");
   const [filteredSurfaceData, setFilteredSurfaceData] = useState([]);
   const [filteredServerData, setFilteredServerData] = useState([]);
+  const [selectedSurface, setSelectedSurface] = useState(emptySurface);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,7 +52,7 @@ const DataTabPage = () => {
   useEffect(() => {
     const uniqueServers = getUniqueServers(filteredSurfaceData);
     setFilteredServerData(uniqueServers);
-  }, [filteredSurfaceData]);
+  }, [filteredSurfaceData]); // runs every time filteredSurfaceData is updated
 
   function getUniqueServers(surfaces) {
     const servers = surfaces.map((result) => result.server);
@@ -60,8 +74,15 @@ const DataTabPage = () => {
       (item) => query.test(item.venueName)
       // || query.test(item.surfaceName) // uncomment this to also search in surface names
     );
-
     return results;
+  };
+
+  const handleRowSelection = (e) => {
+    setSelectedSurface(
+      surfaceData.find(
+        (surface) => surface.id.toString() === e.currentTarget.id
+      )
+    );
   };
 
   if (apiError) {
@@ -84,10 +105,13 @@ const DataTabPage = () => {
           <Tables
             surfaceData={filteredSurfaceData}
             serverData={filteredServerData}
+            selectedSurfaceId={selectedSurface.id}
+            selectedServerId={selectedSurface.server.id}
+            handleSelect={handleRowSelection}
           />
         </div>
         <div className="col-3">
-          <DetailsBox />
+          <DetailsBox selectedSurface={selectedSurface} />
         </div>
       </div>
     </>

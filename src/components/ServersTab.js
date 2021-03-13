@@ -1,6 +1,6 @@
 import React from "react";
 
-const ServersTab = ({ serverData }) => {
+const ServersTab = ({ serverData, selectedServerId }) => {
   return (
     <div className="mt-4">
       <table className="table table-hover">
@@ -12,7 +12,12 @@ const ServersTab = ({ serverData }) => {
         </thead>
         <tbody>
           {serverData.map((row) => (
-            <tr className="table-dark" key={row.id} id={row.id}>
+            <tr
+              className={`table-dark ${
+                selectedServerId === row.id ? " table-active" : ""
+              }`}
+              key={row.id}
+            >
               <td>{row.ip4}</td>
               <td>{row.dns}</td>
             </tr>
