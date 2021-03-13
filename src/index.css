@@ -17,3 +17,7 @@
 .navbar-container {
     min-height: 700px;
 }
+
+.details-box {
+    top: 1rem;
+}

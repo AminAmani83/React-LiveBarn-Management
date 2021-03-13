@@ -2,7 +2,7 @@ import React from "react";
 
 const DetailsBox = ({ selectedSurface }) => (
   <>
-    <div className="card border-secondary mb-3">
+    <div className="card border-secondary mb-3 position-sticky sticky-top details-box">
       <div className="card-header">Details</div>
       <div className="card-body">
         <h5 className="card-title">Venue Name:</h5>
