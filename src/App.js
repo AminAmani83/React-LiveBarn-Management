@@ -16,7 +16,7 @@ function App() {
       <div className="mt-4 mx-3">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-1 border-right">
+            <div className="col-1 border-right navbar-container">
               <NavBar
                 tabs={tabs}
                 activeTab={activeTab}
