@@ -1,15 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "./components/NavBar";
 import DataTabPage from "./components/DataTabPage";
 import EmptyTabPage from "./components/EmptyTabPage";
 
 function App() {
   const tabs = { EMPTY: "EMPTY", DATA: "DATA" }; // Available Tabs (defined to avoid typos)
+  const apiURL =
+    "https://2hsjstzo71.execute-api.us-east-1.amazonaws.com/prod/livebarn-interview-project";
+
   const [activeTab, setActiveTab] = useState(tabs.DATA);
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [apiError, setApiError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(apiURL);
+        if (response.ok) {
+          const result = await response.json();
+          setData(result);
+          console.log(data);
+          setIsLoading(false);
+        } else {
+          // in case of 403, 404 or...
+          throw new Error("Error fetching data...");
+        }
+      } catch (error) {
+        setApiError(error);
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, []); // runs only once
 
   const handleTabClick = (e) => {
     setActiveTab(e.target.getAttribute("name"));
   };
+
+  if (apiError) {
+    return <div className="h3 mt-5 text-center">{apiError.message}</div>;
+  }
+
+  if (isLoading) {
+    return <div className="h3 mt-5 text-center">Loading...</div>;
+  }
 
   return (
     <>
