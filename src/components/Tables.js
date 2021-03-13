@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SurfacesTab from "../SurfacesTab";
+import SurfacesTab from "./SurfacesTab";
 import ServersTab from "./ServersTab";
 
 const Tables = (props) => {
