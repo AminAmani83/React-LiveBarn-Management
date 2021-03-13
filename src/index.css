@@ -10,10 +10,6 @@
     text-transform: capitalize;
 }
 
-#search-input {
-    /* width:430px !important; */
-}
-
 .navbar-container {
     min-height: 700px;
 }

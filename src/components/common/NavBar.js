@@ -1,4 +1,5 @@
 import React from "react";
+import NavButton from "./NavButton";
 
 const NavBar = ({ tabs, activeTab, handleTabClick }) => {
   return (
@@ -6,16 +7,11 @@ const NavBar = ({ tabs, activeTab, handleTabClick }) => {
       <div className="row">
         {Object.keys(tabs).map((tabName) => (
           <div className="col-10 mb-3" key={tabName}>
-            <button
-              name={tabName}
-              type="button"
-              className={`btn btn-block btn-primary capitalized ${
-                activeTab === tabName ? "active" : ""
-              }`}
-              onClick={handleTabClick}
-            >
-              {tabName}
-            </button>
+            <NavButton
+              tabName={tabName}
+              isActive={activeTab === tabName}
+              handleTabClick={handleTabClick}
+            />
           </div>
         ))}
       </div>
