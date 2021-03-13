@@ -21,11 +21,7 @@ function App() {
         if (response.ok) {
           const surfaces = await response.json();
           setSurfaceData(surfaces);
-          const servers = surfaces.map((result) => result.server);
-          const uniqueServers = servers.filter(
-            (value, index, self) =>
-              self.map((server) => server.id).indexOf(value.id) === index
-          );
+          const uniqueServers = getUniqueServers(surfaces);
           setServerData(uniqueServers);
           setIsLoading(false);
         } else {
@@ -39,6 +35,15 @@ function App() {
     };
     fetchData();
   }, []); // runs only once
+
+  function getUniqueServers(surfaces) {
+    const servers = surfaces.map((result) => result.server);
+    const uniqueServers = servers.filter(
+      (value, index, self) =>
+        self.map((server) => server.id).indexOf(value.id) === index
+    );
+    return uniqueServers;
+  }
 
   const handleTabClick = (e) => {
     setActiveTab(e.target.getAttribute("name"));
