@@ -3,10 +3,37 @@ import SearchBar from "./SearchBar";
 import DetailsBox from "./DetailsBox";
 import Tables from "./Tables";
 
-const DataTabPage = ({ surfaceData }) => {
+const DataTabPage = () => {
+  const apiURL =
+    "https://2hsjstzo71.execute-api.us-east-1.amazonaws.com/prod/livebarn-interview-project";
+
+  const [surfaceData, setSurfaceData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [apiError, setApiError] = useState(null);
   const [searchText, setSearchText] = useState("");
-  const [filteredSurfaceData, setFilteredSurfaceData] = useState(surfaceData);
+  const [filteredSurfaceData, setFilteredSurfaceData] = useState([]);
   const [filteredServerData, setFilteredServerData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(apiURL);
+        if (response.ok) {
+          const surfaces = await response.json();
+          setSurfaceData(surfaces);
+          setFilteredSurfaceData(surfaces);
+          setIsLoading(false);
+        } else {
+          // in case of 403, 404 or...
+          throw new Error("Error fetching data...");
+        }
+      } catch (error) {
+        setApiError(error);
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, []); // runs only once
 
   useEffect(() => {
     const uniqueServers = getUniqueServers(filteredSurfaceData);
@@ -36,6 +63,14 @@ const DataTabPage = ({ surfaceData }) => {
 
     return results;
   };
+
+  if (apiError) {
+    return <div className="h3 mt-5 text-center">{apiError.message}</div>;
+  }
+
+  if (isLoading) {
+    return <div className="h3 mt-5 text-center">Loading...</div>;
+  }
 
   return (
     <>
