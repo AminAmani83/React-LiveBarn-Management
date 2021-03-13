@@ -10,7 +10,6 @@ function App() {
 
   const [activeTab, setActiveTab] = useState(tabs.DATA);
   const [surfaceData, setSurfaceData] = useState([]);
-  const [serverData, setServerData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [apiError, setApiError] = useState(null);
 
@@ -21,8 +20,6 @@ function App() {
         if (response.ok) {
           const surfaces = await response.json();
           setSurfaceData(surfaces);
-          const uniqueServers = getUniqueServers(surfaces);
-          setServerData(uniqueServers);
           setIsLoading(false);
         } else {
           // in case of 403, 404 or...
@@ -35,15 +32,6 @@ function App() {
     };
     fetchData();
   }, []); // runs only once
-
-  function getUniqueServers(surfaces) {
-    const servers = surfaces.map((result) => result.server);
-    const uniqueServers = servers.filter(
-      (value, index, self) =>
-        self.map((server) => server.id).indexOf(value.id) === index
-    );
-    return uniqueServers;
-  }
 
   const handleTabClick = (e) => {
     setActiveTab(e.target.getAttribute("name"));
@@ -71,10 +59,7 @@ function App() {
             </div>
             <div className="col-11">
               {activeTab === tabs.DATA ? (
-                <DataTabPage
-                  surfaceData={surfaceData}
-                  serverData={serverData}
-                />
+                <DataTabPage surfaceData={surfaceData} />
               ) : activeTab === tabs.EMPTY ? (
                 <EmptyTabPage />
               ) : (

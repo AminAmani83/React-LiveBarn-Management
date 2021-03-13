@@ -23,6 +23,7 @@ const SurfacesTab = ({ surfaceData }) => {
           ))}
         </tbody>
       </table>
+      <div className="text-center">Matched: {surfaceData.length}</div>
     </div>
   );
 };
