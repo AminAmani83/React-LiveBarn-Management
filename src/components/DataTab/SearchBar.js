@@ -3,10 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const SearchBar = ({ value, handleFieldChange }) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <>
       <div className="bg-primary p-3">
-        <form className="my-2">
+        <form className="my-2" onSubmit={handleSubmit}>
           <div className="input-group">
             <div className="input-group-prepend">
               <span className="input-group-text">
