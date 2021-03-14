@@ -13,17 +13,17 @@ function App() {
 
   return (
     <>
-      <div className="mt-4 mx-3">
+      <div className="mt-4 mx-2">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-1 border-right navbar-container">
+            <div className="col-2 col-lg-1 border-right navbar-container">
               <NavBar
                 tabs={tabs}
                 activeTab={activeTab}
                 handleTabClick={handleTabClick}
               />
             </div>
-            <div className="col-11">
+            <div className="col-10 col-lg-11">
               {activeTab === tabs.DATA ? (
                 <DataTabPage />
               ) : activeTab === tabs.EMPTY ? (
