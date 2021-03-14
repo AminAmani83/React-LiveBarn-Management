@@ -7,7 +7,10 @@ const Tables = ({
   serverData,
   selectedSurfaceId,
   selectedServerId,
-  handleSelect,
+  extractedServerId,
+  extractedSurfaceData,
+  handleServerSelection,
+  handleSurfaceSelection,
 }) => {
   const tabs = { SURFACES: "SURFACES", SERVERS: "SERVERS" }; // Available Tabs (defined to avoid typos)
   const [activeTab, setActiveTab] = useState(tabs.SURFACES);
@@ -39,14 +42,18 @@ const Tables = ({
           {activeTab === tabs.SURFACES ? (
             <SurfacesTab
               surfaceData={surfaceData}
-              handleSelect={handleSelect}
+              handleSurfaceSelection={handleSurfaceSelection}
               selectedSurfaceId={selectedSurfaceId}
             />
           ) : activeTab === tabs.SERVERS ? (
             <ServersTab
-              surfaceData={surfaceData}
+              extractedSurfaceData={extractedSurfaceData}
+              selectedSurfaceId={selectedSurfaceId}
+              handleSurfaceSelection={handleSurfaceSelection}
               serverData={serverData}
+              extractedServerId={extractedServerId}
               selectedServerId={selectedServerId}
+              handleServerSelection={handleServerSelection}
             />
           ) : (
             ""

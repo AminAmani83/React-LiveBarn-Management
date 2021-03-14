@@ -1,10 +1,14 @@
 import React from "react";
 
-const SurfacesTab = ({ surfaceData, selectedSurfaceId, handleSelect }) => {
+const SurfacesTab = ({
+  surfaceData,
+  selectedSurfaceId,
+  handleSurfaceSelection,
+}) => {
   return (
     <div className="mt-4">
       <table className="table table-hover">
-        <thead>
+        <thead className="table-secondary">
           <tr>
             <th scope="col">Venue Name</th>
             <th scope="col">Surface Name</th>
@@ -20,7 +24,7 @@ const SurfacesTab = ({ surfaceData, selectedSurfaceId, handleSelect }) => {
               }`}
               key={row.id}
               id={row.id}
-              onClick={handleSelect}
+              onClick={handleSurfaceSelection}
             >
               <td>{row.venueName}</td>
               <td>{row.surfaceName}</td>
