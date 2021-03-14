@@ -20,12 +20,13 @@ const UseDataManagement = (props) => {
   const [surfaceData, setSurfaceData] = useState([]); // API Results
   const [isLoading, setIsLoading] = useState(true);
   const [apiError, setApiError] = useState(null);
-  const [searchText, setSearchText] = useState("");
-  const [filteredSurfaceData, setFilteredSurfaceData] = useState([]);
-  const [filteredServerData, setFilteredServerData] = useState([]);
+  const [searchText, setSearchText] = useState(""); // Value entered in SearchBar
+  const [filteredSurfaceData, setFilteredSurfaceData] = useState([]); // Search Results
+  const [filteredServerData, setFilteredServerData] = useState([]); // Search Results
   const [selectedSurface, setSelectedSurface] = useState(emptySurface);
 
   useEffect(() => {
+    // Fetch Data From API
     const fetchData = async () => {
       try {
         const response = await fetch(apiURL);
@@ -36,6 +37,7 @@ const UseDataManagement = (props) => {
           setIsLoading(false);
         } else {
           // in case of 403, 404 or...
+          console.log("Error", response.status, response.statusText);
           throw new Error("Error fetching data...");
         }
       } catch (error) {
