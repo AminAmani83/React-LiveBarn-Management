@@ -23,7 +23,7 @@ const UseDataManagement = (props) => {
   const [searchText, setSearchText] = useState(""); // Value entered in SearchBar
   const [filteredSurfaceData, setFilteredSurfaceData] = useState([]); // Search Results
   const [filteredServerData, setFilteredServerData] = useState([]); // Search Results
-  const [selectedSurface, setSelectedSurface] = useState(emptySurface);
+  const [selectedSurface, setSelectedSurface] = useState(emptySurface); // Whole Surface Object
 
   useEffect(() => {
     // Fetch Data From API

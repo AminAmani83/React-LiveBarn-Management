@@ -44,6 +44,7 @@ const Tables = ({
             />
           ) : activeTab === tabs.SERVERS ? (
             <ServersTab
+              surfaceData={surfaceData}
               serverData={serverData}
               selectedServerId={selectedServerId}
             />
