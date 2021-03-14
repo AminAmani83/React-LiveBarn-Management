@@ -12,12 +12,19 @@ const DataTabPage = () => {
     filteredSurfaceData,
     filteredServerData,
     selectedSurface,
+    extractedServerId,
+    extractedSurfaceData,
     searchVenue,
-    selectRow,
+    selectServer,
+    selectSurface,
   } = UseDataManagement();
 
-  const handleRowSelection = (e) => {
-    selectRow(e.currentTarget.id);
+  const handleSurfaceSelection = (e) => {
+    selectSurface(e.currentTarget.id);
+  };
+
+  const handleServerSelection = (e) => {
+    selectServer(e.currentTarget.id);
   };
 
   const handleSearch = (e) => {
@@ -46,7 +53,10 @@ const DataTabPage = () => {
             serverData={filteredServerData}
             selectedSurfaceId={selectedSurface.id}
             selectedServerId={selectedSurface.server.id}
-            handleSelect={handleRowSelection}
+            extractedSurfaceData={extractedSurfaceData}
+            extractedServerId={extractedServerId}
+            handleServerSelection={handleServerSelection}
+            handleSurfaceSelection={handleSurfaceSelection}
           />
         </div>
         <div className="col-3">

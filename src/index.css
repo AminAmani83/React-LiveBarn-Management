@@ -2,7 +2,7 @@
     cursor: pointer;
 }
 
-/* Capitalize Only the First Letter */
+/* Capitalize Only the First Letter of Buttons or Tabs */
 .capitalized {
     text-transform: lowercase;
 }
@@ -10,10 +10,25 @@
     text-transform: capitalize;
 }
 
+/* To display the navbar separator line (border-right) on empty pages */
 .navbar-container {
     min-height: 700px;
 }
 
+/* The details box is sticky on Top,
+It needs to have some offset from the top */
 .details-box {
     top: 1rem;
+}
+
+/* The extracted row, is a table row in the server table, 
+that is used as a placeholder to display the surfaces table, 
+this row should not have a background change on hover */
+.extracted-row:hover > td {
+    background-color: #222!important;
+}
+
+/* Fixed Lighter Background for Table Headers */
+thead.table-secondary:hover {
+    background-color: #444!important;
 }

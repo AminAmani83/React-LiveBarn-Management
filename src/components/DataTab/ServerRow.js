@@ -1,0 +1,14 @@
+import React from "react";
+
+const ServerRow = ({ row, handleServerSelect, isActive }) => (
+  <tr
+    className={`table-dark ${isActive ? " table-active" : ""}`}
+    id={row.id}
+    onClick={handleServerSelect}
+  >
+    <td>{row.ip4}</td>
+    <td>{row.dns}</td>
+  </tr>
+);
+
+export default ServerRow;

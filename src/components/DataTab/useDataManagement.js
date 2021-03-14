@@ -17,13 +17,19 @@ const UseDataManagement = (props) => {
     },
   };
 
-  const [surfaceData, setSurfaceData] = useState([]); // API Results
+  // API
+  const [surfaceData, setSurfaceData] = useState([]); // Pure API Results
   const [isLoading, setIsLoading] = useState(true);
   const [apiError, setApiError] = useState(null);
+  // Search
   const [searchText, setSearchText] = useState(""); // Value entered in SearchBar
   const [filteredSurfaceData, setFilteredSurfaceData] = useState([]); // Search Results
   const [filteredServerData, setFilteredServerData] = useState([]); // Search Results
-  const [selectedSurface, setSelectedSurface] = useState(emptySurface);
+  // Selection (Surfaces Tables)
+  const [selectedSurface, setSelectedSurface] = useState(emptySurface); // Whole Surface Object (incl. server Id)
+  // Row Extraction (Servers Table)
+  const [extractedServerId, setExtractedServerId] = useState(""); // Only the Server Id
+  const [extractedSurfaceData, setExtractedSurfaceData] = useState([]); // Whole Surface Objects
 
   useEffect(() => {
     // Fetch Data From API
@@ -53,6 +59,13 @@ const UseDataManagement = (props) => {
     setFilteredServerData(uniqueServers);
   }, [filteredSurfaceData]); // runs every time filteredSurfaceData is updated
 
+  useEffect(() => {
+    // update extracted surface data
+    setExtractedSurfaceData(
+      filteredSurfaceData.filter((s) => s.server.id === extractedServerId)
+    );
+  }, [filteredSurfaceData, extractedServerId]); // when search term changes or a server is selected
+
   function getUniqueServers(surfaces) {
     const servers = surfaces.map((result) => result.server);
     const uniqueServers = servers.filter(
@@ -76,10 +89,20 @@ const UseDataManagement = (props) => {
     return results;
   };
 
-  const selectRow = (id) => {
+  const selectSurface = (id_str) => {
     setSelectedSurface(
-      surfaceData.find((surface) => surface.id.toString() === id)
+      surfaceData.find((surface) => surface.id.toString() === id_str)
     );
+  };
+
+  const selectServer = (id_str) => {
+    if (extractedServerId.toString() === id_str) {
+      // server de-selected
+      setExtractedServerId("");
+    } else {
+      // server selected
+      setExtractedServerId(parseInt(id_str));
+    }
   };
 
   return {
@@ -89,8 +112,11 @@ const UseDataManagement = (props) => {
     filteredSurfaceData,
     filteredServerData,
     selectedSurface,
+    extractedServerId,
+    extractedSurfaceData,
     searchVenue,
-    selectRow,
+    selectServer,
+    selectSurface,
   };
 };
 
