@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 const DetailsBox = ({ selectedSurface }) => (
@@ -20,6 +21,10 @@ const DetailsBox = ({ selectedSurface }) => (
     </div>
   </>
 );
+
+DetailsBox.propTypes = {
+  selectedSurface: PropTypes.object,
+};
 
 const mapStateToProps = (state) => {
   return {

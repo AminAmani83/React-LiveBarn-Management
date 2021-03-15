@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const ServerRow = ({ row, handleServerSelect, isActive }) => (
   <tr
@@ -10,5 +11,11 @@ const ServerRow = ({ row, handleServerSelect, isActive }) => (
     <td>{row.dns}</td>
   </tr>
 );
+
+ServerRow.propTypes = {
+  row: PropTypes.object.isRequired,
+  handleServerSelect: PropTypes.func.isRequired,
+  isActive: PropTypes.bool.isRequired,
+};
 
 export default ServerRow;

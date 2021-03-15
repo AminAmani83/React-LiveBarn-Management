@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import SurfacesTab from "./SurfacesTab";
 import ServersTab from "./ServersTab";
 import Spinner from "../common/Spinner";
@@ -54,6 +55,11 @@ const Tables = ({ loading, error }) => {
       </div>
     </div>
   );
+};
+
+Tables.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.object.isRequired,
 };
 
 export default Tables;

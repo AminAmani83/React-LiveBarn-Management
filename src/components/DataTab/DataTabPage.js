@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import SearchBar from "./SearchBar";
 import DetailsBox from "./DetailsBox";
 import Tables from "./Tables";
@@ -31,6 +32,11 @@ const DataTabPage = ({ loading, loadData }) => {
       </div>
     </>
   );
+};
+
+DataTabPage.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  loadData: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {

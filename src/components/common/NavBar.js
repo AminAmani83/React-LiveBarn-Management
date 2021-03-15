@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import NavButton from "./NavButton";
 
 const NavBar = ({ tabs, activeTab, handleTabClick }) => {
@@ -17,6 +18,12 @@ const NavBar = ({ tabs, activeTab, handleTabClick }) => {
       </div>
     </>
   );
+};
+
+NavBar.propTypes = {
+  tabs: PropTypes.object.isRequired,
+  activeTab: PropTypes.string.isRequired,
+  handleTabClick: PropTypes.func.isRequired,
 };
 
 export default NavBar;

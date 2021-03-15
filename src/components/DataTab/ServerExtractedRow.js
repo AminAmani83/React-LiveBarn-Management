@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes, { object } from "prop-types";
 
 const ServerExtractedRow = ({
   isDisplayed,
@@ -44,6 +45,14 @@ const ServerExtractedRow = ({
       </td>
     </tr>
   );
+};
+
+ServerExtractedRow.propTypes = {
+  isDisplayed: PropTypes.bool.isRequired,
+  extractedSurfaceData: PropTypes.arrayOf(object).isRequired,
+  selectedSurfaceId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
+  handleSurfaceSelection: PropTypes.func.isRequired,
 };
 
 export default ServerExtractedRow;

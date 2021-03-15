@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes, { object } from "prop-types";
 import { connect } from "react-redux";
 import { updateSelectedSurface } from "../../Redux/actions/selectionActions";
 
@@ -41,6 +42,13 @@ const SurfacesTab = ({ surfaceData, selectSurface, selectedSurfaceId }) => {
   );
 };
 
+SurfacesTab.propTypes = {
+  surfaceData: PropTypes.arrayOf(object).isRequired,
+  selectSurface: PropTypes.func.isRequired,
+  selectedSurfaceId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
+};
+
 const mapDispatchToProps = {
   selectSurface: updateSelectedSurface,
 };
@@ -49,7 +57,6 @@ const mapStateToProps = (state) => {
   return {
     surfaceData: state.filteredSurfaces,
     selectedSurfaceId: state.selections.selectedSurfaceId,
-    loading: state.pendingApiCallsCount > 0, // number of ongoing API calls
   };
 };
 

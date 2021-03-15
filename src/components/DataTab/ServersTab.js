@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes, { object } from "prop-types";
 import { connect } from "react-redux";
 import ServerExtractedRow from "./ServerExtractedRow";
 import ServerRow from "./ServerRow";
@@ -49,6 +50,19 @@ const ServersTab = ({
       </table>
     </div>
   );
+};
+
+ServersTab.propTypes = {
+  extractedSurfaceData: PropTypes.arrayOf(object).isRequired,
+  selectedSurfaceId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
+  handleSurfaceSelection: PropTypes.func.isRequired,
+  serverData: PropTypes.arrayOf(object).isRequired,
+  extractedServerId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
+  selectedServerId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
+  handleServerSelection: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
+import TextInput from "../common/TextInput";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { connect } from "react-redux";
 import { updateFilteredSurfaces } from "../../Redux/actions/filteredSurfaceActions";
-import TextInput from "../common/TextInput";
 
 const SearchBar = ({ searchSurfaces, loading }) => {
   const [searchText, setSearchText] = useState(""); // Value entered in SearchBar
@@ -15,7 +16,7 @@ const SearchBar = ({ searchSurfaces, loading }) => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // avoid page refresh if user presses Enter
   };
 
   return (
@@ -40,6 +41,11 @@ const SearchBar = ({ searchSurfaces, loading }) => {
       </div>
     </>
   );
+};
+
+SearchBar.propTypes = {
+  searchSurfaces: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 const mapDispatchToProps = {
