@@ -11,29 +11,23 @@ const SearchBar = ({ searchText, setSearchText, loading }) => {
     setSearchText(e.target.value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); // avoid page refresh if user presses Enter
-  };
-
   return (
     <>
       <div className="bg-primary p-3">
-        <form className="my-2" onSubmit={handleSubmit}>
-          <div className="input-group">
-            <div className="input-group-prepend">
-              <span className="input-group-text">
-                <FontAwesomeIcon icon={faSearch} />
-              </span>
-            </div>
-            <TextInput
-              name="search-input"
-              value={searchText}
-              handleFieldChange={handleFieldChange}
-              placeholder="Search"
-              disabled={loading}
-            />
+        <div className="input-group">
+          <div className="input-group-prepend">
+            <span className="input-group-text">
+              <FontAwesomeIcon icon={faSearch} />
+            </span>
           </div>
-        </form>
+          <TextInput
+            name="search-input"
+            value={searchText}
+            handleFieldChange={handleFieldChange}
+            placeholder="Search"
+            disabled={loading}
+          />
+        </div>
       </div>
     </>
   );
