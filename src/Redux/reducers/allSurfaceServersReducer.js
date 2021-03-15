@@ -1,13 +1,16 @@
 import * as types from "../actions/actionTypes";
 import initialState from "./initialState";
 
-const surfaceServersReducer = (state = initialState.surfaceServers, action) => {
+const allSurfaceServersReducer = (
+  state = initialState.allSurfacesAndServers,
+  action
+) => {
   switch (action.type) {
     case types.LOAD_SURFACE_SERVERS_SUCCESS:
-      return action.surfaceServers;
+      return action.allSurfacesAndServers;
     default:
       return state;
   }
 };
 
-export default surfaceServersReducer;
+export default allSurfaceServersReducer;

@@ -1,23 +1,27 @@
 import React, { useState } from "react";
 import SurfacesTab from "./SurfacesTab";
 import ServersTab from "./ServersTab";
+import Spinner from "../common/Spinner";
 
-const Tables = ({
-  surfaceData,
-  serverData,
-  selectedSurfaceId,
-  selectedServerId,
-  extractedServerId,
-  extractedSurfaceData,
-  handleServerSelection,
-  handleSurfaceSelection,
-}) => {
+const Tables = ({ loading, error }) => {
   const tabs = { SURFACES: "SURFACES", SERVERS: "SERVERS" }; // Available Tabs (defined to avoid typos)
   const [activeTab, setActiveTab] = useState(tabs.SURFACES);
 
   const handleTabClick = (e) => {
     setActiveTab(e.target.getAttribute("name"));
   };
+
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if (error.onLoad) {
+    return (
+      <div className="text-center mt-3">
+        <div className="h3 mt-5 text-center">{error.onLoad}</div>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -40,21 +44,9 @@ const Tables = ({
       <div className="tab-content">
         <div className="tab-pane fade active show">
           {activeTab === tabs.SURFACES ? (
-            <SurfacesTab
-              surfaceData={surfaceData}
-              handleSurfaceSelection={handleSurfaceSelection}
-              selectedSurfaceId={selectedSurfaceId}
-            />
+            <SurfacesTab />
           ) : activeTab === tabs.SERVERS ? (
-            <ServersTab
-              extractedSurfaceData={extractedSurfaceData}
-              selectedSurfaceId={selectedSurfaceId}
-              handleSurfaceSelection={handleSurfaceSelection}
-              serverData={serverData}
-              extractedServerId={extractedServerId}
-              selectedServerId={selectedServerId}
-              handleServerSelection={handleServerSelection}
-            />
+            <ServersTab />
           ) : (
             ""
           )}

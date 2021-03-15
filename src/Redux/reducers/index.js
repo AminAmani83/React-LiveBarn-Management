@@ -1,16 +1,16 @@
 import { combineReducers } from "redux";
-import surfaceServers from "./surfaceServersReducer";
+import allSurfacesAndServers from "./allSurfaceServersReducer";
 import filteredSurfaces from "./filteredSurfacesReducer";
 import filteredServers from "./filteredServersReducer";
 import selections from "./selectionsReducer";
-import pendingApiCallsCount from "./apiStatusReducer";
+import apiCallInProgress from "./apiStatusReducer";
 
 const rootReducer = combineReducers({
-  surfaceServers,
+  allSurfacesAndServers,
   filteredSurfaces,
   filteredServers,
   selections,
-  pendingApiCallsCount,
+  apiCallInProgress,
 });
 
 export default rootReducer;

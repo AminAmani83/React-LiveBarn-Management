@@ -1,70 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import DetailsBox from "./DetailsBox";
 import Tables from "./Tables";
-import UseDataManagement from "./useDataManagement";
+import { connect } from "react-redux";
+import { loadAllSurfaceServers } from "../../Redux/actions/surfaceServerActions";
 
-const DataTabPage = () => {
-  const {
-    isLoading,
-    apiError,
-    searchText,
-    filteredSurfaceData,
-    filteredServerData,
-    selectedSurface,
-    extractedServerId,
-    extractedSurfaceData,
-    searchVenue,
-    selectServer,
-    selectSurface,
-  } = UseDataManagement();
-
-  const handleSurfaceSelection = (e) => {
-    selectSurface(e.currentTarget.id);
-  };
-
-  const handleServerSelection = (e) => {
-    selectServer(e.currentTarget.id);
-  };
-
-  const handleSearch = (e) => {
-    searchVenue(e.target.value);
-  };
-
-  if (apiError) {
-    return <div className="h3 mt-5 text-center">{apiError.message}</div>;
-  }
-
-  if (isLoading) {
-    return <div className="h3 mt-5 text-center">Loading...</div>;
-  }
+const DataTabPage = ({ loading, loadData }) => {
+  const [error, setError] = useState({});
+  // API CALL
+  useEffect(() => {
+    loadData().catch((error) => {
+      setError({ onLoad: error.message });
+    });
+  }, [loadData]); // runs only once
 
   return (
     <>
       <div className="row mb-4">
         <div className="col-12">
-          <SearchBar value={searchText} handleFieldChange={handleSearch} />
+          <SearchBar loading={loading} />
         </div>
       </div>
       <div className="row">
         <div className="col-9">
-          <Tables
-            surfaceData={filteredSurfaceData}
-            serverData={filteredServerData}
-            selectedSurfaceId={selectedSurface.id}
-            selectedServerId={selectedSurface.server.id}
-            extractedSurfaceData={extractedSurfaceData}
-            extractedServerId={extractedServerId}
-            handleServerSelection={handleServerSelection}
-            handleSurfaceSelection={handleSurfaceSelection}
-          />
+          <Tables loading={loading} error={error} />
         </div>
         <div className="col-3">
-          <DetailsBox selectedSurface={selectedSurface} />
+          <DetailsBox />
         </div>
       </div>
     </>
   );
 };
 
-export default DataTabPage;
+const mapStateToProps = (state) => {
+  return {
+    loading: state.apiCallInProgress,
+  };
+};
+
+const mapDispatchToProps = {
+  loadData: loadAllSurfaceServers,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DataTabPage);

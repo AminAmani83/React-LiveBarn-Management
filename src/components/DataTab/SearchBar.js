@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { connect } from "react-redux";
+import { updateFilteredSurfaces } from "../../Redux/actions/filteredSurfaceActions";
 
-const SearchBar = ({ value, handleFieldChange }) => {
+const SearchBar = ({ searchSurfaces, loading }) => {
+  const [searchText, setSearchText] = useState(""); // Value entered in SearchBar
+
+  const handleFieldChange = (e) => {
+    const searchQuery = e.target.value;
+    setSearchText(searchQuery);
+    searchSurfaces(searchQuery);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
   };
@@ -21,9 +31,10 @@ const SearchBar = ({ value, handleFieldChange }) => {
               className="form-control mr-sm-2"
               id="search-input"
               type="text"
-              value={value}
+              value={searchText}
               onChange={handleFieldChange}
               placeholder="Search"
+              disabled={loading}
             />
           </div>
         </form>
@@ -32,4 +43,8 @@ const SearchBar = ({ value, handleFieldChange }) => {
   );
 };
 
-export default SearchBar;
+const mapDispatchToProps = {
+  searchSurfaces: updateFilteredSurfaces,
+};
+
+export default connect(null, mapDispatchToProps)(SearchBar);

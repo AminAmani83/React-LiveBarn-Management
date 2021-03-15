@@ -1,14 +1,18 @@
 import * as types from "./actionTypes";
 import * as surfacesApi from "../../api/api";
 import { apiCallBegin, apiCallError } from "./apiStatusActions";
+import { updateFilteredSurfaces } from "./filteredSurfaceActions";
 
-export const loadSurfaceServers = () => {
+export const loadAllSurfaceServers = () => {
   return async (dispatch) => {
     dispatch(apiCallBegin());
     try {
-      const surfaceServers = await surfacesApi.getSurfaces();
-      console.log(surfaceServers);
-      dispatch({ type: types.LOAD_SURFACE_SERVERS_SUCCESS, surfaceServers });
+      const allSurfacesAndServers = await surfacesApi.getSurfaces();
+      dispatch({
+        type: types.LOAD_SURFACE_SERVERS_SUCCESS,
+        allSurfacesAndServers,
+      });
+      dispatch(updateFilteredSurfaces("")); // copy the results over to filteredSurfaces
     } catch (error) {
       dispatch(apiCallError(error.message));
       throw error;

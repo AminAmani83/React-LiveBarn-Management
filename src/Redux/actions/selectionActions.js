@@ -15,7 +15,11 @@ export const updateSelectedSurface = (selectedSurfaceId) => {
 };
 
 export const updateExtractedServer = (extractedServerId) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const { selections } = getState();
+    if (selections.extractedServerId === extractedServerId) {
+      extractedServerId = "";
+    }
     return dispatch({ type: types.UPDATE_EXTRACTED_SERVER, extractedServerId });
   };
 };

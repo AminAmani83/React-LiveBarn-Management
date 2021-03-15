@@ -5,7 +5,7 @@ export const getSurfaces = async () => {
   //   console.log("API Call: Get Surfaces");
   try {
     const response = await fetch(apiURL);
-    handleResponse(response);
+    return handleResponse(response);
   } catch (error) {
     handleError(error);
   }
@@ -13,11 +13,8 @@ export const getSurfaces = async () => {
 
 const handleResponse = async (response) => {
   if (response.ok) {
-    const surfaces = await response.json();
-    return surfaces;
-    //   setSurfaceData(surfaces);
-    //   setFilteredSurfaceData(surfaces);
-    //   setIsLoading(false);
+    const allSurfacesAndServers = await response.json();
+    return allSurfacesAndServers;
   } else {
     // in case of 403, 404 or...
     console.error("Error", response.status, response.statusText);
@@ -26,8 +23,6 @@ const handleResponse = async (response) => {
 };
 
 const handleError = (error) => {
-  // setApiError(error);
-  // setIsLoading(false);
   console.error("API call failed. " + error);
   throw error;
 };

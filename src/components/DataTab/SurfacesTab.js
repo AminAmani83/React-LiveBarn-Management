@@ -1,10 +1,12 @@
 import React from "react";
+import { connect } from "react-redux";
+import { updateSelectedSurface } from "../../Redux/actions/selectionActions";
 
-const SurfacesTab = ({
-  surfaceData,
-  selectedSurfaceId,
-  handleSurfaceSelection,
-}) => {
+const SurfacesTab = ({ surfaceData, selectSurface, selectedSurfaceId }) => {
+  const handleSurfaceSelection = (e) => {
+    selectSurface(parseInt(e.currentTarget.id));
+  };
+
   return (
     <div className="mt-4">
       <table className="table table-hover">
@@ -39,4 +41,16 @@ const SurfacesTab = ({
   );
 };
 
-export default SurfacesTab;
+const mapDispatchToProps = {
+  selectSurface: updateSelectedSurface,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    surfaceData: state.filteredSurfaces,
+    selectedSurfaceId: state.selections.selectedSurfaceId,
+    loading: state.pendingApiCallsCount > 0, // number of ongoing API calls
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SurfacesTab);

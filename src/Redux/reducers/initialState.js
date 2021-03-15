@@ -1,5 +1,5 @@
 const initialData = {
-  surfaceServers: [],
+  allSurfacesAndServers: [],
   filteredSurfaces: [],
   filteredServers: [],
   selections: {
@@ -7,7 +7,7 @@ const initialData = {
     selectedServerId: "",
     extractedServerId: "",
   },
-  pendingApiCallsCount: 0,
+  apiCallInProgress: false,
 };
 
 export default initialData;

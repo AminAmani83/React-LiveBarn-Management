@@ -6,6 +6,9 @@ const ServerExtractedRow = ({
   selectedSurfaceId,
   handleSurfaceSelection,
 }) => {
+  const handleSurfaceSelect = (e) => {
+    handleSurfaceSelection(parseInt(e.currentTarget.id));
+  };
   if (!isDisplayed) return null;
   return (
     <tr className="extracted-row">
@@ -28,7 +31,7 @@ const ServerExtractedRow = ({
                   }`}
                   key={row.id}
                   id={row.id}
-                  onClick={handleSurfaceSelection}
+                  onClick={handleSurfaceSelect}
                 >
                   <td>{row.venueName}</td>
                   <td>{row.surfaceName}</td>
