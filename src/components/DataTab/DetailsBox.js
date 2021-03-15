@@ -29,7 +29,7 @@ DetailsBox.propTypes = {
 const mapStateToProps = (state) => {
   return {
     selectedSurface: state.allSurfacesAndServers.find(
-      (s) => s.id === state.selections.selectedSurfaceId
+      (s) => s.id === state.userInput.selectedSurfaceId
     ),
   };
 };

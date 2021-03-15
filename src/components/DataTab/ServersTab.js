@@ -64,12 +64,12 @@ ServersTab.propTypes = {
 const mapStateToProps = (state) => {
   return {
     extractedSurfaceData: state.filteredSurfaces.filter(
-      (s) => s.server.id === state.selections.extractedServerId
+      (s) => s.server.id === state.userInput.extractedServerId
     ),
-    selectedSurfaceId: state.selections.selectedSurfaceId,
+    selectedSurfaceId: state.userInput.selectedSurfaceId,
     serverData: state.filteredServers,
-    extractedServerId: state.selections.extractedServerId,
-    selectedServerId: state.selections.selectedServerId,
+    extractedServerId: state.userInput.extractedServerId,
+    selectedServerId: state.userInput.selectedServerId,
   };
 };
 

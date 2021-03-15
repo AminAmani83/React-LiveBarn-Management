@@ -2,10 +2,11 @@ const initialData = {
   allSurfacesAndServers: [],
   filteredSurfaces: [],
   filteredServers: [],
-  selections: {
+  userInput: {
     selectedSurfaceId: "",
     selectedServerId: "",
     extractedServerId: "",
+    searchTerm: "",
   },
   apiCallInProgress: false,
 };

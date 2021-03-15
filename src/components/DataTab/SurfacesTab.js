@@ -56,7 +56,7 @@ const mapDispatchToProps = {
 const mapStateToProps = (state) => {
   return {
     surfaceData: state.filteredSurfaces,
-    selectedSurfaceId: state.selections.selectedSurfaceId,
+    selectedSurfaceId: state.userInput.selectedSurfaceId,
   };
 };
 

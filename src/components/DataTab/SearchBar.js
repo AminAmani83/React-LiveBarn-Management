@@ -1,18 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import TextInput from "../common/TextInput";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { connect } from "react-redux";
-import { updateFilteredSurfaces } from "../../Redux/actions/filteredSurfaceActions";
+import { updateSearchTerm } from "../../Redux/actions/selectionActions";
 
-const SearchBar = ({ searchSurfaces, loading }) => {
-  const [searchText, setSearchText] = useState(""); // Value entered in SearchBar
-
+const SearchBar = ({ searchText, setSearchText, loading }) => {
   const handleFieldChange = (e) => {
-    const searchQuery = e.target.value;
-    setSearchText(searchQuery);
-    searchSurfaces(searchQuery);
+    setSearchText(e.target.value);
   };
 
   const handleSubmit = (e) => {
@@ -44,12 +40,19 @@ const SearchBar = ({ searchSurfaces, loading }) => {
 };
 
 SearchBar.propTypes = {
-  searchSurfaces: PropTypes.func.isRequired,
+  searchText: PropTypes.string.isRequired,
+  setSearchText: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
 };
 
-const mapDispatchToProps = {
-  searchSurfaces: updateFilteredSurfaces,
+const mapStateToProps = (state) => {
+  return {
+    searchText: state.userInput.searchTerm,
+  };
 };
 
-export default connect(null, mapDispatchToProps)(SearchBar);
+const mapDispatchToProps = {
+  setSearchText: updateSearchTerm,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

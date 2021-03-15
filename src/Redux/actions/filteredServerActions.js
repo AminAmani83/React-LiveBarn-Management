@@ -4,7 +4,7 @@ export const updateFilteredServers = () => {
   return (dispatch, getState) => {
     const { filteredSurfaces } = getState();
     const filteredServers = getUniqueServers(filteredSurfaces);
-    return dispatch({ type: types.UPDATE_FILTERED_SERVERS, filteredServers });
+    dispatch({ type: types.UPDATE_FILTERED_SERVERS, filteredServers });
   };
 };
 
