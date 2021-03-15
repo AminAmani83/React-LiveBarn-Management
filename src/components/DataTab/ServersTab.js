@@ -15,12 +15,8 @@ const ServersTab = ({
   serverData,
   extractedServerId,
   selectedServerId,
-  handleServerSelection,
+  handleServerExtraction,
 }) => {
-  const handleServerSelect = (e) => {
-    handleServerSelection(parseInt(e.currentTarget.id));
-  };
-
   return (
     <div className="mt-4">
       <table className="table table-hover">
@@ -36,7 +32,7 @@ const ServersTab = ({
               <ServerRow
                 row={row}
                 isActive={selectedServerId === row.id}
-                handleServerSelect={handleServerSelect}
+                handleServerExtraction={handleServerExtraction}
               />
               <ServerExtractedRow
                 isDisplayed={extractedServerId === row.id}
@@ -62,7 +58,7 @@ ServersTab.propTypes = {
     .isRequired,
   selectedServerId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     .isRequired,
-  handleServerSelection: PropTypes.func.isRequired,
+  handleServerExtraction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -78,7 +74,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  handleServerSelection: updateExtractedServer,
+  handleServerExtraction: updateExtractedServer,
   handleSurfaceSelection: updateSelectedSurface,
 };
 
