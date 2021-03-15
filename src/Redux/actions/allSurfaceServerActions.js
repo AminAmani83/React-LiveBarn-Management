@@ -4,6 +4,8 @@ import { apiCallBegin, apiCallError } from "./apiStatusActions";
 import { updateFilteredSurfaces } from "./filteredSurfaceActions";
 import { updateSelectedSurface } from "./selectionActions";
 
+const POLLING_DELAY = 60000;
+
 export const loadAllSurfaceServers = () => {
   return async (dispatch, getState) => {
     dispatch(apiCallBegin());
@@ -20,7 +22,7 @@ export const loadAllSurfaceServers = () => {
         dispatch(updateFilteredSurfaces(getState().userInput.searchTerm));
         updateUserInput(dispatch, getState);
         // repeat
-        setTimeout(pollApi, 100000);
+        setTimeout(pollApi, POLLING_DELAY);
       };
       pollApi();
     } catch (error) {
