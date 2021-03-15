@@ -4,7 +4,7 @@ import SearchBar from "./SearchBar";
 import DetailsBox from "./DetailsBox";
 import Tables from "./Tables";
 import { connect } from "react-redux";
-import { loadAllSurfaceServers } from "../../Redux/actions/surfaceServerActions";
+import { loadAllSurfaceServers } from "../../Redux/actions/allSurfaceServerActions";
 
 const DataTabPage = ({ loading, loadData }) => {
   const [error, setError] = useState({});
