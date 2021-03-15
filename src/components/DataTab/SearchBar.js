@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { connect } from "react-redux";
 import { updateFilteredSurfaces } from "../../Redux/actions/filteredSurfaceActions";
+import TextInput from "../common/TextInput";
 
 const SearchBar = ({ searchSurfaces, loading }) => {
   const [searchText, setSearchText] = useState(""); // Value entered in SearchBar
@@ -27,12 +28,10 @@ const SearchBar = ({ searchSurfaces, loading }) => {
                 <FontAwesomeIcon icon={faSearch} />
               </span>
             </div>
-            <input
-              className="form-control mr-sm-2"
-              id="search-input"
-              type="text"
+            <TextInput
+              name="search-input"
               value={searchText}
-              onChange={handleFieldChange}
+              handleFieldChange={handleFieldChange}
               placeholder="Search"
               disabled={loading}
             />
