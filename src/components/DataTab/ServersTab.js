@@ -18,7 +18,7 @@ const ServersTab = ({
   handleServerExtraction,
 }) => {
   return (
-    <div className="mt-4">
+    <div className="mt-4 scrollable-y">
       <table className="table table-hover">
         <thead className="table-secondary">
           <tr>

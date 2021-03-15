@@ -12,7 +12,7 @@
 
 /* To display the navbar separator line (border-right) on empty pages */
 .navbar-container {
-    min-height: 700px;
+    min-height: 920px;
 }
 
 /* The details box is sticky on Top,
@@ -31,4 +31,10 @@ this row should not have a background change on hover */
 /* Fixed Lighter Background for Table Headers */
 thead.table-secondary:hover {
     background-color: #444!important;
+}
+
+/* The surfaces and servers tables are scrollable while the rest of the page is stationary */
+.scrollable-y{
+    overflow-y: scroll;
+    height: 750px;
 }

@@ -17,6 +17,7 @@ const Tables = ({ loading, error }) => {
   }
 
   if (error.onLoad) {
+    // API Error
     return (
       <div className="text-center mt-3">
         <div className="h3 mt-5 text-center">{error.onLoad}</div>
